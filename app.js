@@ -188,13 +188,38 @@ function updateCategory(idCate) {
     renderListCate(itemCates);
 }
 
+function validate() {
+    if(nameCate.value == null || nameCate.value == '') {
+            nameCate.focus();
+            const nameError = document.getElementById('nameCate-error');
+            nameError.innerHTML = 'The name category is required!';
+            return false;
+    }
+    if(slug.value == null || slug.value == '') {
+            slug.focus();
+            const slugError = document.getElementById('slug-error');
+            slugError.innerHTML = 'The slug category is required!';
+            return false;
+    }
+    if(description.value == null || description.value == '') {
+            description.focus();
+            const descriptionError = document.getElementById('description-error');
+            descriptionError.innerHTML = 'The description category is required!';
+            return false;
+    }
+    return true;
+}
+
 form.addEventListener("submit", function (e) {
     e.preventDefault();
-    if (idForm == 0) {
-        addCategory();   
-    } else {
-        updateCategory(idForm);
+    if(validate()){
+        if (idForm == 0) {
+            addCategory();   
+        } else {
+            updateCategory(idForm);
+        }
     }
+    
     setEventRemove();
     setEventDetails();
     setEventEdit();
